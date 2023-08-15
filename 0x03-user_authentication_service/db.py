@@ -41,10 +41,10 @@ class DB:
         self._session.commit()
         return user
 
-    def find_user_by(self, **kwargs) -> User:
-        """
+    """def find_user_by(self, **kwargs) -> User:
+        
         returns a user
-        """
+        
         users_all = self._session.query(User)
         for key, value in kwargs.items():
             if key not in User.__dict__:
@@ -53,4 +53,4 @@ class DB:
         for key, value in users_all:
             if getattr(users_all, key) == value:
                 return users_all
-        return InvalidRequestError
+        return InvalidRequestError"""
