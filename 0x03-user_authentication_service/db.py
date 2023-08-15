@@ -18,7 +18,7 @@ class DB:
     def __init__(self) -> None:
         """Initialize a new DB instance
         """
-        self._engine = create_engine("sqlite:///a.db")
+        self._engine = create_engine("sqlite:///a.db", echo=False)
         Base.metadata.drop_all(self._engine)
         Base.metadata.create_all(self._engine)
         self.__session = None
@@ -41,14 +41,15 @@ class DB:
         self._session.commit()
         return user
 
-    """def find_user_by(self, **kwargs) -> User:
+    def find_user_by(self, **kwargs) -> User:
+        """
         returns a user
-        users_all = self._session.query(User)
+        """
+        users = self._session.query(User)
         for key, value in kwargs.items():
             if key not in User.__dict__:
-                raise NoResultFound
-
-        for key, value in users_all:
-            if getattr(users_all, key) == value:
-                return users_all
-        return InvalidRequestError"""
+                raise InvalidRequestError
+            for user in users:
+                if getattr(user, key) == value:
+                    return user
+        raise NoResultFound
