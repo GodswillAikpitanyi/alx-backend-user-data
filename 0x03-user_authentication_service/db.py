@@ -50,7 +50,6 @@ class DB:
             if key not in User.__dict__:
                 raise NoResultFound
 
-
         for key, value in users_all:
             if getattr(users_all, key) == value:
                 return users_all
