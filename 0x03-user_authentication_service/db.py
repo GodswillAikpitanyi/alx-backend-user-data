@@ -42,9 +42,7 @@ class DB:
         return user
 
     """def find_user_by(self, **kwargs) -> User:
-        
         returns a user
-        
         users_all = self._session.query(User)
         for key, value in kwargs.items():
             if key not in User.__dict__:
