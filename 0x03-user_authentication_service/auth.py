@@ -85,5 +85,7 @@ class Auth:
         """
         Destroy session
         """
-        return self._db.update_user(user_id, session_id=None)
-        
+        try:
+            user = self._db.update_user(user_id, session_id=None)
+        except ValueError:
+            return None
