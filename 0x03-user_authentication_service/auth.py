@@ -41,4 +41,6 @@ class Auth:
         except Exception:
             return False
         password = password.encode('utf-8')
-        return bcrypt.checkpw(password, user.hashed_password)
+        if bcrypt.checkpw(password, user.hashed_password):
+            return True
+        return False
