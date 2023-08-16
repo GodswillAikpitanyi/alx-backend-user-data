@@ -47,13 +47,16 @@ class Auth:
         """
         try:
             user = self._db.find_user_by(email=email)
+            user_password = user.hashed_password
+            pass_word = password.encode('utf-8')
+            if password is None:
+                return False
+            return bcrypt.checkpw(pass_word, user_password)
         except NoResultFound:
             return False
-        if password is None:
-            return False
-        user_password = user.hashed_password
-        pass_word = password.encode('utf-8')
-        return bcrypt.checkpw(pass_word, user_password)
+        #user_password = user.hashed_password
+        #pass_word = password.encode('utf-8')
+        #return bcrypt.checkpw(pass_word, user_password)
 
     def create_session(self, email: str) -> str:
         """
