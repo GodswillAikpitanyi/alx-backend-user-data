@@ -62,6 +62,7 @@ def logout():
         return redirect("/")
     abort(403)
 
+
 @app.route("/profile", methods=["GET"])
 def profile():
     """
