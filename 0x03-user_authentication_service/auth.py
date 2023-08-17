@@ -45,11 +45,13 @@ class Auth:
         """
         validate credentials
         """
+        user = None
         try:
             user = self._db.find_user_by(email=email)
-            user_password = user.hashed_password
-            passwd = password.encode("utf-8")
-            return bcrypt.checkpw(passwd, user_password)
+            if user is not None:
+                user_password = user.hashed_password
+                passwd = password.encode("utf-8")
+                return bcrypt.checkpw(passwd, user_password)
         except NoResultFound:
             return False
         return False
