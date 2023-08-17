@@ -115,4 +115,5 @@ class Auth:
             raise ValueError
         hashed_password = _hash_password(password)
         kwargs = {reset_token: None, password: hashed_password}
-        return self._db.update_user(user.id, **kwargs)
+        self._db.update_user(user.id, **kwargs)
+        return None
